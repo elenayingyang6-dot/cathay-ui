@@ -1,181 +1,1194 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>Simulated Cathay UI</title>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f7;
-    margin: 0;
-    padding: 0;
-}
-.header-bar {
-    background-color: white;
-    padding: 10px 40px;
-    border-bottom: 1px solid #ccc;
-}
-.logo-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-}
-.flight-row {
-    display: flex;
-    justify-content: space-between;
-    background-color: #e5e5e5;
-    padding: 8px 0 8px 10px;
-    font-size: 16px;
-}
-.breadcrumb {
-    display: flex;
-    gap: 20px;
-    font-size: 14px;
-    color: gray;
-    padding: 10px 0;
-    padding-left: 40px;
-}
-.breadcrumb span.active {
-    color: #005288;
-    font-weight: bold;
-}
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 40px;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-}
-h2 {
-    color: #006666;
-}
-.section {
-    margin-bottom: 30px;
-}
-.info-box, .wellness-box, .consent-box {
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: #fafafa;
-    border-radius: 5px;
-}
-.wellness-box {
-    background-color: #e6f4dc;
-    font-size: 16px;
-}
-.consent-box {
-    background-color: #f8f8f8;
-}
-.input-section {
-    margin-top: 15px;
-}
-input[type="text"] {
-    width: 100%;
-    max-width: 600px;
-    padding: 18px;
-    font-size: 20px;
-    margin-top: 10px;
-    border: 1px solid #999;
-    box-sizing: border-box;
-}
-.answer-box {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #dff0d8;
-    font-size: 18px;
-    font-weight: normal;
-    border: 1px solid #b2d8b2;
-    color: #00695c;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-.button {
-    margin-top: 15px;
-    padding: 12px 24px;
-    font-size: 18px;
-    background-color: #00695c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.secondary-button {
-    background-color: #c62828;
-}
-.prompt-text {
-    font-style: italic;
-    margin-top: 20px;
-    color: #004d40;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cathay Pacific - Special Needs Survey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cathay-green: #265C62;
+            --cathay-green-light: #DFEBEB;
+            --cathay-gray: #D0D0D0;
+            --cathay-white: #FFFFFF;
+            --cathay-success: #28a745;
+            --cathay-warning: #ffc107;
+            --cathay-info: #17a2b8;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--cathay-green) 0%, #1a4a4f 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background: var(--cathay-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--cathay-green);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .logo-text p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .flight-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .flight-info h3 {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .flight-details {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb-item {
+            color: var(--cathay-gray-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--cathay-blue);
+            font-weight: 500;
+        }
+
+        .breadcrumb-item i {
+            font-size: 0.75rem;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0.5rem auto;
+            padding: 0 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--cathay-blue) 0%, var(--cathay-blue-dark) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .card-header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .section {
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--cathay-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--cathay-green);
+        }
+
+        .quick-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-card {
+            background: var(--cathay-gray);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:hover {
+            border-color: var(--cathay-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .option-card.selected {
+            border-color: var(--cathay-green);
+            background: linear-gradient(135deg, rgba(38, 92, 98, 0.05) 0%, rgba(223, 235, 235, 0.1) 100%);
+        }
+
+        .option-card.selected::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 30px 30px 0;
+            border-color: transparent var(--cathay-green) transparent transparent;
+        }
+
+        .option-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .option-icon {
+            font-size: 2rem;
+            color: var(--cathay-green);
+            margin-bottom: 1rem;
+        }
+
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--cathay-green);
+        }
+
+        .option-description {
+            font-size: 0.875rem;
+            color: var(--cathay-gray-dark);
+            line-height: 1.5;
+        }
+
+        .custom-input-section {
+            background: linear-gradient(135deg, var(--cathay-green-light) 0%, var(--cathay-gray) 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px dashed var(--cathay-green);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 500;
+            color: var(--cathay-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--cathay-green);
+            box-shadow: 0 0 0 3px rgba(38, 92, 98, 0.1);
+        }
+
+        .voice-input-btn {
+            background: var(--cathay-green);
+            color: var(--cathay-white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .voice-input-btn:hover {
+            background: #1a4a4f;
+            transform: translateY(-1px);
+        }
+
+        .quick-prompts {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--cathay-green-light);
+            border-radius: 8px;
+            border: 1px solid var(--cathay-green);
+        }
+
+        .quick-prompts h5 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--cathay-green);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .prompt-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .prompt-btn {
+            background: var(--cathay-green-light);
+            color: var(--cathay-green);
+            border: 1px solid var(--cathay-green);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: left;
+        }
+
+        .prompt-btn:hover {
+            background: var(--cathay-green);
+            color: var(--cathay-white);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .prompt-categories {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--cathay-green) 0%, #1a4a4f 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--cathay-green);
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--cathay-gray);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 1.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .result-icon.success {
+            color: var(--cathay-success);
+        }
+
+        .result-icon.warning {
+            color: var(--cathay-warning);
+        }
+
+        .result-icon.info {
+            color: var(--cathay-info);
+        }
+
+        .result-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--cathay-green);
+        }
+
+        .result-content p {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .result-link {
+            color: var(--cathay-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .result-link:hover {
+            text-decoration: underline;
+        }
+
+        .confirmation-checkboxes {
+            margin: 1rem 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background-color: var(--cathay-green-light);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-top: 0.25rem;
+            accent-color: var(--cathay-green);
+        }
+
+        .checkbox-item span {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .confirmation-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--cathay-green-light);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .confirm-btn {
+            background: var(--cathay-green);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .confirm-btn:hover {
+            background: #1a4a4f;
+            transform: translateY(-2px);
+        }
+
+        .confirmation-note {
+            color: var(--cathay-green);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .confirmed-services {
+            text-align: left;
+        }
+
+        .support-line {
+            background: linear-gradient(135deg, var(--cathay-warning) 0%, #ffb84d 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .support-line h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .support-line .phone {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--cathay-green);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            background: var(--cathay-green);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .header-content,
+            .breadcrumb-content,
+            .main-container {
+                padding: 0 1rem;
+            }
+
+            .card-header,
+            .card-body {
+                padding: 1.5rem;
+            }
+
+            .quick-options {
+                grid-template-columns: 1fr;
+            }
+
+            .flight-details {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="header-bar">
-    <div class="logo-row">
-        <div><strong style="color:#004d40;">✈ CATHAY PACIFIC</strong></div>
-        <div><strong style="color:#005288;">Total CNY <span style="font-weight:800;">2,239</span> ⌄</strong></div>
-    </div>
-    <div class="flight-row">
-        <div>HKG ➔ PVG &nbsp;&nbsp; 23 Aug 2025 - 30 Aug 2025 &nbsp;&nbsp; <a href="#">View details</a></div>
-    </div>
-    <div class="breadcrumb">
-        <span>① Choose flights</span>
-        <span class="active">② Passenger information</span>
-        <span>③ Seat and extras</span>
-        <span>④ Confirm and pay</span>
-    </div>
-</div>
-
-<div class="container">
-    <h2>Passenger Information</h2>
-    <div class="section">
-        <p>Please verify your personal details are correct.</p>
-        <div class="info-box">
-            <p><strong>Passenger:</strong> Mrs Yy Ee</p>
-            <p><strong>Mobile:</strong> XXX</p>
-            <p><strong>Email:</strong> xxx@yyy</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Consent for Processing of Personal Information</h2>
-        <div class="consent-box">
-            <p><input type="checkbox"> I have read and understood the Privacy Notice.</p>
-            <p><input type="checkbox"> I consent to the processing of sensitive personal info.</p>
-            <p><input type="checkbox"> I consent to data sharing with third parties.</p>
-            <p><input type="checkbox"> I consent to data export outside Mainland China.</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Cathay Wellness 360 Special Needs Survey</h2>
-        <div class="wellness-box">
-            <div class="prompt-text">
-                Would you like large-print boarding passes, assistance with transferring between terminals/gates, or medication refrigeration?
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo">
+                    <div class="logo-img">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Cathay Pacific</h1>
+                        <p>Cathay Pacific</p>
+                    </div>
+                </div>
             </div>
-            <div class="input-section">
-                <input type="text" id="inputBox" placeholder="Type your request...">
-                <button class="button" style="background-color:#4a5568;" onclick="handleVoiceInput()">🎤 Voice Input</button>
+            <div class="flight-info">
+                <h3>Flight Information</h3>
+                <div class="flight-details">
+                    <span>CX 123</span>
+                    <span>Hong Kong → Taipei</span>
+                    <span>January 15, 2024</span>
+                </div>
             </div>
-            <div class="answer-box" id="output">Generating Answers</div>
-            <button class="button secondary-button">📢 Play Results</button>
         </div>
-    </div>
-</div>
+    </header>
 
-<script>
-function handleVoiceInput() {
-    const output = document.getElementById("output");
-    output.innerText = "Generating Answers";
+    <nav class="breadcrumb">
+        <div class="breadcrumb-content">
+            <div class="breadcrumb-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="breadcrumb-item">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="breadcrumb-item">
+                <i class="fas fa-plane"></i>
+                <span>Flight Management</span>
+            </div>
+            <div class="breadcrumb-item">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="breadcrumb-item active">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Special Needs Survey</span>
+            </div>
+        </div>
+    </nav>
 
-    setTimeout(() => {
-        output.innerText = 
-            "1. Vegan Meal Confirmation ✅\n" +
-            "2. Check Links for Third Party Pet Service: XXX\n" +
-            "3. Please call Special Needs Support Line 📞 for confirmation on services regarding special medication";
-    }, 1200);
-}
-</script>
+    <main class="main-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-heart"></i> Cathay Wellness 360 Special Needs Survey</h2>
+                <p>We are committed to providing personalized service experiences for every passenger</p>
+            </div>
+            <div class="card-body">
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-edit"></i>
+                        Special Needs Survey
+                    </h3>
+                    <div class="custom-input-section">
+                        <div class="input-group">
+                            <label class="input-label" for="customNeeds">
+                                Please describe your special needs or service requirements in detail:
+                            </label>
+                            <textarea 
+                                id="customNeeds" 
+                                class="input-field" 
+                                placeholder="For example: I cannot eat spicy food due to allergies and need wheelchair assistance at the airport. I'm also traveling alone and not familiar with the airport layout. Additionally, I need assistance with personal care during the flight such as feeding and medication administration. I'm an elderly passenger and would like assistance navigating through the airport..."
+                            ></textarea>
+                        </div>
+                        
+                        <div class="quick-prompts">
+                            <h5>Quick Prompts from Previous Travel History:</h5>
+                            <div class="prompt-buttons">
+                                <button class="prompt-btn" onclick="fillPrompt('previous-dietary')">
+                                    <i class="fas fa-history"></i> Previous Meal Preferences
+                                </button>
+                                <button class="prompt-btn" onclick="fillPrompt('previous-mobility')">
+                                    <i class="fas fa-history"></i> Previous Mobility Needs
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button class="voice-input-btn" onclick="handleVoiceInput()">
+                            <i class="fas fa-microphone"></i>
+                            Voice Input
+                        </button>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="submitSurvey()">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Special Needs Survey
+                </button>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing your needs, please wait...</p>
+                </div>
+
+                <div class="result-section" id="resultSection">
+                    <h3 class="section-title">
+                        <i class="fas fa-clipboard-check"></i>
+                        Needs Analysis Results
+                    </h3>
+                    <div id="results"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2024 Cathay Pacific Airways Limited. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Accessibility Services</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fill prompt function
+        function fillPrompt(type) {
+            const textarea = document.getElementById('customNeeds');
+            let promptText = '';
+            
+            switch(type) {
+                case 'previous-dietary':
+                    promptText = 'Based on my previous flights with Cathay Pacific, I had gluten-free meal arrangements due to celiac disease. I would like to request the same gluten-free meal service for this trip.';
+                    break;
+                case 'previous-mobility':
+                    promptText = 'I previously traveled with my own wheelchair and received assistance with boarding and deplaning. I would like to request the same wheelchair assistance service for this journey.';
+                    break;
+            }
+            
+            // Check if textarea already has content
+            if (textarea.value.trim()) {
+                // Add new line and append the new prompt
+                textarea.value = textarea.value + '\n\n' + promptText;
+            } else {
+                // Set the prompt directly if textarea is empty
+                textarea.value = promptText;
+            }
+            
+            textarea.focus();
+            // Scroll to bottom to show the new content
+            textarea.scrollTop = textarea.scrollHeight;
+        }
+
+        // Voice input function
+        function handleVoiceInput() {
+            const textarea = document.getElementById('customNeeds');
+            const btn = event.target;
+            
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                            btn.innerHTML = '<i class="fas fa-microphone-slash"></i> Stop Recording';
+            btn.style.background = 'var(--cathay-danger)';
+            
+            // Simulate voice recognition process
+            setTimeout(() => {
+                const sampleText = "I cannot eat spicy food due to allergies and need wheelchair assistance at the airport. I'm also traveling alone and not familiar with the airport layout. Additionally, I need assistance with personal care during the flight such as feeding and medication administration. I'm an elderly passenger and would like assistance navigating through the airport.";
+                textarea.value = sampleText;
+                
+                btn.innerHTML = '<i class="fas fa-microphone"></i> Voice Input';
+                btn.style.background = 'var(--cathay-gold)';
+            }, 3000);
+            } else {
+                alert('Your browser does not support voice input functionality');
+            }
+        }
+
+        // Submit survey
+        function submitSurvey() {
+            const submitBtn = event.target;
+            const loading = document.getElementById('loading');
+            const resultSection = document.getElementById('resultSection');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            loading.style.display = 'block';
+            resultSection.style.display = 'none';
+            
+            // Get custom input
+            const customNeeds = document.getElementById('customNeeds').value;
+            
+            // Simulate AI analysis process
+            setTimeout(() => {
+                loading.style.display = 'none';
+                resultSection.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Special Needs Survey';
+                
+                displayResults(customNeeds);
+            }, 3000);
+        }
+
+        // Display results
+        function displayResults(customNeeds) {
+            const resultsContainer = document.getElementById('results');
+            let resultsHTML = '';
+            let hasCathayServices = false;
+            let hasThirdPartyServices = false;
+            let hasUnmetNeeds = false;
+            
+            // Analyze the input for different service types
+            if (customNeeds.trim()) {
+                // Case 1: Cathay Pacific existing services
+                if (customNeeds.toLowerCase().includes('wheelchair') || customNeeds.toLowerCase().includes('dietary') || customNeeds.toLowerCase().includes('language') || customNeeds.toLowerCase().includes('spicy') || customNeeds.toLowerCase().includes('allergy') || customNeeds.toLowerCase().includes('elderly') || customNeeds.toLowerCase().includes('old') || customNeeds.toLowerCase().includes('gluten') || customNeeds.toLowerCase().includes('celiac') || customNeeds.toLowerCase().includes('previous')) {
+                    hasCathayServices = true;
+                    
+                    if (customNeeds.toLowerCase().includes('wheelchair')) {
+                        resultsHTML += `
+                            <div class="result-item">
+                                <div class="result-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="result-content">
+                                    <h4>Wheelchair Service - Confirmation Required</h4>
+                                    <p>We can provide wheelchair assistance. Please confirm the following details:</p>
+                                    <div class="confirmation-checkboxes">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="wheelchair-airport"> 
+                                            <span>I need wheelchair assistance at the airport only</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="wheelchair-onboard"> 
+                                            <span>I need wheelchair assistance on board the aircraft</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="wheelchair-transfer"> 
+                                            <span>I need assistance transferring to aircraft seat</span>
+                                        </label>
+                                    </div>
+                                    <p style="margin-top: 1rem; color: var(--cathay-info);">
+                                        <i class="fas fa-info-circle"></i>
+                                        Please confirm your requirements above. This service will be synchronized to your Wellness Passport after confirmation.
+                                    </p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (customNeeds.toLowerCase().includes('dietary') || customNeeds.toLowerCase().includes('spicy') || customNeeds.toLowerCase().includes('allergy') || customNeeds.toLowerCase().includes('gluten') || customNeeds.toLowerCase().includes('celiac') || customNeeds.toLowerCase().includes('meal')) {
+                        // Determine which options to pre-select based on user input
+                        const needsText = customNeeds.toLowerCase();
+                        const preSelectGluten = needsText.includes('gluten') || needsText.includes('celiac');
+                        const preSelectSpicy = needsText.includes('spicy') || needsText.includes('chili') || needsText.includes('pepper');
+                        const preSelectVegetarian = needsText.includes('vegetarian');
+                        const preSelectVegan = needsText.includes('vegan');
+                        
+                        resultsHTML += `
+                            <div class="result-item">
+                                <div class="result-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="result-content">
+                                    <h4>Special Dietary Requirements - Confirmation Required</h4>
+                                    <p>We can accommodate your dietary needs. Please specify and confirm:</p>
+                                    <div class="confirmation-checkboxes">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="dietary-no-spicy" ${preSelectSpicy ? 'checked' : ''}> 
+                                            <span>No spicy food (chili, pepper, etc.)</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="dietary-vegetarian" ${preSelectVegetarian ? 'checked' : ''}> 
+                                            <span>Vegetarian meals preferred</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="dietary-vegan" ${preSelectVegan ? 'checked' : ''}> 
+                                            <span>Vegan meals preferred</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="dietary-gluten-free" ${preSelectGluten ? 'checked' : ''}> 
+                                            <span>Gluten-free meals (for celiac disease)</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="dietary-lactose-free"> 
+                                            <span>Lactose-free meals</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="dietary-low-sodium"> 
+                                            <span>Low-sodium meals</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="dietary-diabetic"> 
+                                            <span>Diabetic meals</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="dietary-allergies"> 
+                                            <span>I have food allergies (please specify below)</span>
+                                        </label>
+                                        <textarea placeholder="Please specify any food allergies..." style="width: 100%; margin-top: 0.5rem; padding: 0.5rem; border: 1px solid var(--cathay-gray); border-radius: 4px; resize: vertical; min-height: 60px;"></textarea>
+                                        
+                                        <label class="checkbox-item" style="margin-top: 1rem;">
+                                            <input type="checkbox" id="dietary-other"> 
+                                            <span>Other dietary requirements (please specify below)</span>
+                                        </label>
+                                        <textarea id="dietary-other-text" placeholder="Please describe any other dietary requirements..." style="width: 100%; margin-top: 0.5rem; padding: 0.5rem; border: 1px solid var(--cathay-gray); border-radius: 4px; resize: vertical; min-height: 60px; display: none;"></textarea>
+                                    </div>
+                                    
+                                    <p style="margin-top: 1rem; color: var(--cathay-info);">
+                                        <i class="fas fa-info-circle"></i>
+                                        Please confirm your dietary preferences above. This information will be synchronized to your Wellness Passport after confirmation.
+                                    </p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (customNeeds.toLowerCase().includes('elderly') || customNeeds.toLowerCase().includes('old')) {
+                        resultsHTML += `
+                            <div class="result-item">
+                                <div class="result-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="result-content">
+                                    <h4>Elderly Passenger Services - Confirmation Required</h4>
+                                    <p>We offer specialized services for elderly passengers. Please confirm your needs:</p>
+                                    <div class="confirmation-checkboxes">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="elderly-faster-checkin"> 
+                                            <span>Airport faster check-in service</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="elderly-mobility-storage"> 
+                                            <span>Mobility aids storage assistance</span>
+                                        </label>
+                                    </div>
+                                    <p style="margin-top: 1rem; color: var(--cathay-info);">
+                                        <i class="fas fa-info-circle"></i>
+                                        Please confirm your elderly passenger service needs above. This information will be synchronized to your Wellness Passport after confirmation.
+                                    </p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (customNeeds.toLowerCase().includes('language') || customNeeds.toLowerCase().includes('chinese')) {
+                        resultsHTML += `
+                            <div class="result-item">
+                                <div class="result-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="result-content">
+                                    <h4>Language Assistance - Confirmation Required</h4>
+                                    <p>We can provide language support. Please confirm your requirements:</p>
+                                    <div class="confirmation-checkboxes">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="language-chinese-staff"> 
+                                            <span>I need Chinese-speaking staff assistance</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="language-bilingual"> 
+                                            <span>I prefer bilingual announcements when possible</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="language-materials"> 
+                                            <span>I need written materials in Chinese</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="language-ongoing"> 
+                                            <span>I need language support throughout my journey</span>
+                                        </label>
+                                    </div>
+                                    <p style="margin-top: 1rem; color: var(--cathay-info);">
+                                        <i class="fas fa-info-circle"></i>
+                                        Please confirm your language support needs above. This information will be synchronized to your Wellness Passport after confirmation.
+                                    </p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                // Case 2: Third-party services (Meet & Assist, Airport Transfer)
+                if (customNeeds.toLowerCase().includes('airport') && (customNeeds.toLowerCase().includes('unfamiliar') || customNeeds.toLowerCase().includes('not familiar') || customNeeds.toLowerCase().includes('first time') || customNeeds.toLowerCase().includes('elderly') || customNeeds.toLowerCase().includes('alone'))) {
+                    hasThirdPartyServices = true;
+                    
+                    resultsHTML += `
+                        <div class="result-item">
+                            <div class="result-icon info">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="result-content">
+                                <h4>Meet & Assist Service - Third Party Recommendation</h4>
+                                <p>For comprehensive airport assistance, we recommend our trusted partner:</p>
+                                <div style="background: var(--cathay-green-light); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                                    <h5 style="color: var(--cathay-green); margin-bottom: 0.5rem;">🚗 ALLWAYS VIP Concierge Service</h5>
+                                    <p style="margin-bottom: 1rem;">Professional airport transfer and concierge services including:</p>
+                                    <ul style="margin-left: 1rem; margin-bottom: 1rem;">
+                                        <li>Door-to-airport pickup service</li>
+                                        <li>Meet & Assist at airport</li>
+                                        <li>Luggage handling assistance</li>
+                                        <li>Priority check-in support</li>
+                                    </ul>
+                                    <a href="https://www.allwaysvip.com/" target="_blank" class="result-link" style="display: inline-block; background: var(--cathay-green); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;">
+                                        <i class="fas fa-external-link-alt"></i> Visit ALLWAYS VIP
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Case 3: Unmet needs (personal care needs that cannot be provided)
+                if (customNeeds.toLowerCase().includes('personal care') || customNeeds.toLowerCase().includes('feeding') || customNeeds.toLowerCase().includes('medication administration') || customNeeds.toLowerCase().includes('elimination') || customNeeds.toLowerCase().includes('lavatory')) {
+                    hasUnmetNeeds = true;
+                    
+                    resultsHTML += `
+                        <div class="result-item">
+                            <div class="result-icon warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="result-content">
+                                <h4>Personal Care Assistance - Service Limitations</h4>
+                                <p>We have identified the following personal care needs that cannot be provided by our cabin crew:</p>
+                                <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li>Assistance with feeding during the flight</li>
+                                    <li>Help with elimination functions including inside the lavatory</li>
+                                    <li>Administration of medications</li>
+                                    <li>Other personal care needs</li>
+                                </ul>
+                                <p style="margin-top: 1rem; color: #d63384;">
+                                    <i class="fas fa-info-circle"></i>
+                                    While our cabin crew will do everything possible to provide assistance during the flight, we are unable to provide passengers with any assistance for personal care needs. We recommend contacting our specialized support team:
+                                </p>
+                                <div class="phone" style="color: #d63384; font-size: 1.5rem; font-weight: 700; margin: 1rem 0; text-align: center;">+852 2747 3333</div>
+                                <p style="text-align: center; color: #d63384; font-weight: 600;">
+                                    Our team will help you arrange travel with an appropriate escort or make alternative arrangements
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            resultsContainer.innerHTML = resultsHTML;
+            
+            // Add confirmation button if there are Cathay services
+            if (hasCathayServices) {
+                const confirmButton = document.createElement('div');
+                confirmButton.innerHTML = `
+                    <div class="confirmation-section">
+                        <button class="confirm-btn" onclick="confirmServices()">
+                            <i class="fas fa-check"></i>
+                            Confirm All Services
+                        </button>
+                        <p class="confirmation-note">
+                            <i class="fas fa-info-circle"></i>
+                            Please review and confirm all your service requirements above before proceeding
+                        </p>
+                    </div>
+                `;
+                resultsContainer.appendChild(confirmButton);
+            }
+        }
+        
+        // Confirm services function
+        function confirmServices() {
+            // Get all checked checkboxes
+            const checkedServices = [];
+            
+            // Check wheelchair services
+            if (document.getElementById('wheelchair-airport')?.checked) {
+                checkedServices.push('Airport wheelchair assistance');
+            }
+            if (document.getElementById('wheelchair-onboard')?.checked) {
+                checkedServices.push('Onboard wheelchair assistance');
+            }
+            if (document.getElementById('wheelchair-transfer')?.checked) {
+                checkedServices.push('Seat transfer assistance');
+            }
+            
+            // Check dietary services
+            if (document.getElementById('dietary-no-spicy')?.checked) {
+                checkedServices.push('No spicy food');
+            }
+            if (document.getElementById('dietary-vegetarian')?.checked) {
+                checkedServices.push('Vegetarian meals');
+            }
+            if (document.getElementById('dietary-vegan')?.checked) {
+                checkedServices.push('Vegan meals');
+            }
+            if (document.getElementById('dietary-gluten-free')?.checked) {
+                checkedServices.push('Gluten-free meals');
+            }
+            if (document.getElementById('dietary-lactose-free')?.checked) {
+                checkedServices.push('Lactose-free meals');
+            }
+            if (document.getElementById('dietary-low-sodium')?.checked) {
+                checkedServices.push('Low-sodium meals');
+            }
+            if (document.getElementById('dietary-diabetic')?.checked) {
+                checkedServices.push('Diabetic meals');
+            }
+            if (document.getElementById('dietary-allergies')?.checked) {
+                const allergyText = document.querySelector('textarea[placeholder*="allergies"]')?.value;
+                if (allergyText) {
+                    checkedServices.push(`Food allergies: ${allergyText}`);
+                }
+            }
+            if (document.getElementById('dietary-other')?.checked) {
+                const otherText = document.getElementById('dietary-other-text')?.value;
+                if (otherText) {
+                    checkedServices.push(`Other dietary requirements: ${otherText}`);
+                }
+            }
+            
+            // Check language services
+            if (document.getElementById('language-chinese-staff')?.checked) {
+                checkedServices.push('Chinese-speaking staff assistance');
+            }
+            if (document.getElementById('language-bilingual')?.checked) {
+                checkedServices.push('Bilingual announcements');
+            }
+            if (document.getElementById('language-materials')?.checked) {
+                checkedServices.push('Chinese written materials');
+            }
+            if (document.getElementById('language-ongoing')?.checked) {
+                checkedServices.push('Ongoing language support');
+            }
+            
+            // Check elderly passenger services
+            if (document.getElementById('elderly-faster-checkin')?.checked) {
+                checkedServices.push('Elderly airport faster check-in service');
+            }
+            if (document.getElementById('elderly-mobility-storage')?.checked) {
+                checkedServices.push('Elderly mobility aids storage assistance');
+            }
+            
+            if (checkedServices.length > 0) {
+                // Show confirmation message
+                const confirmSection = document.querySelector('.confirmation-section');
+                confirmSection.innerHTML = `
+                    <div class="confirmed-services">
+                        <h4 style="color: var(--cathay-success); margin-bottom: 1rem;">
+                            <i class="fas fa-check-circle"></i> Services Confirmed!
+                        </h4>
+                        <p>The following services have been confirmed and will be synchronized to your Wellness Passport:</p>
+                        <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                            ${checkedServices.map(service => `<li>${service}</li>`).join('')}
+                        </ul>
+                        <p style="color: var(--cathay-success); font-weight: 600;">
+                            <i class="fas fa-info-circle"></i>
+                            This information has been shared with airport staff and cabin crew
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add some interactive effects
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('selected')) {
+                        this.style.transform = 'translateY(-4px)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('selected')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            // Handle dietary other checkbox
+            document.addEventListener('change', function(e) {
+                if (e.target.id === 'dietary-other') {
+                    const otherTextarea = document.getElementById('dietary-other-text');
+                    if (e.target.checked) {
+                        otherTextarea.style.display = 'block';
+                    } else {
+                        otherTextarea.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
 </body>
-</html>
+</html> 
